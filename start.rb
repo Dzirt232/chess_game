@@ -1,3 +1,5 @@
+require './lib/game.rb'
+
 print "Welcome to the chess game!!!\n"
 gets
 print "Enter a \"save\" in the game to saving.\n"
@@ -7,8 +9,10 @@ while true
   variant = gets.chomp.strip.to_i
   case variant
   when 1
+    greet(1)
     break
   when 2
+    greet(2)
     break
   else
     puts "You are enter a wrong answer! Try again..."
