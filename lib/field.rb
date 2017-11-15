@@ -52,8 +52,8 @@ attr_accessor :ceils
   def show(color = :white)
     puts
     strings = ["\n   "]
-    ('a'..'h').each { |e| strings[0] += "  #{e} "}
     if color == :white
+      ('a'..'h').each { |e| strings[0] += "  #{e} "}
       k = 0
       i = 1
       while true
@@ -66,6 +66,7 @@ attr_accessor :ceils
         break if i > 8
       end
     elsif color == :black
+      ('a'..'h').to_a.reverse.each { |e| strings[0] += "  #{e} "}
       k = 63
       i = 8
       while true

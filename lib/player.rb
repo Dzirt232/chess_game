@@ -18,6 +18,7 @@ class Player
 
   def turn
     while true
+      puts "Turn of Player #{name}"
       puts "Enter your figure:"
       figure = gets.chomp.strip
       save_game if figure == "save"
