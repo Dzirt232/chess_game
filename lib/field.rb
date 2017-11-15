@@ -9,8 +9,34 @@ attr_accessor :ceils
     def initialize(number,letter)
       @row = number
       @colon = letter
-      @position = "#{number}#{letter}"
+      @position = "#{letter}#{number}"
       @figure = nil
+      color = @row > 4 ? :black : :white
+      if @row == 2 || @row == 7
+        @figure = Pawn.new(color)
+      end
+      if @row == 1 || @row == 8
+
+        if @colon == "a" || @colon == "h"
+          @figure = Rook.new(color)
+        end
+
+        if @colon == "b" || @colon == "g"
+          @figure = Knight.new(color)
+        end
+
+        if @colon == "c" || @colon == "f"
+          @figure = Bishop.new(color)
+        end
+
+        if @colon == "d"
+          @figure = Queen.new(color)
+        end
+
+        if @colon == "e"
+          @figure = King.new(color)
+        end
+      end
     end
   end
 
@@ -33,7 +59,7 @@ attr_accessor :ceils
       while true
         strings[i] = "\n#{i}  "
         for j in 1..8 do
-          strings[i] += @ceils[k].figure != nil ? "  #{@ceils[k].figure} " : "  \u2610 "
+          strings[i] += @ceils[k].figure != nil ? "  #{@ceils[k].figure.type} " : "  \u2610 "
           k += 1
         end
         i += 1
@@ -45,7 +71,7 @@ attr_accessor :ceils
       while true
         strings [9-i] = "\n#{i}  "
         for j in 1..8 do
-          strings[9-i] += @ceils[k].figure != nil ? "  #{@ceils[k].figure} " : "  \u2610 "
+          strings[9-i] += @ceils[k].figure != nil ? "  #{@ceils[k].figure.type} " : "  \u2610 "
           k -= 1
         end
         i -= 1

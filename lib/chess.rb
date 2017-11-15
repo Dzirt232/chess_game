@@ -1,43 +1,48 @@
 class Chess
-attr_accessor :type
+attr_accessor :type, :color
 
+end
 
-  class King #король
+class King < Chess#король
 
-    def initialize
-      @type = "\u265A"
-    end
+  def initialize(color)
+    @type = "\u265A"
+    @color = color
   end
+end
 
-  class Pawn #пешка
+class Pawn < Chess#пешка
 
-    def initialize
-      @type = "\u265F"
-    end
+  def initialize(color)
+    @type = "\u265F"
+    @color = color
   end
+end
 
-  class Knight #конь
-    def initialize
-      @type = "\u265E"
-    end
+class Knight < Chess#конь
+  def initialize(color)
+    @type = "\u265E"
+    @color = color
   end
+end
 
-  class Queen #королева
-    def initialize
-      @type = "\u265B"
-    end
+class Queen < Chess#королева
+  def initialize(color)
+    @type = "\u265B"
+    @color = color
   end
+end
 
-  class Bishop #слон
-    def initialize
-      @type = "\u265D"
-    end
+class Bishop < Chess#слон
+  def initialize(color)
+    @type = "\u265D"
+    @color = color
   end
+end
 
-  class Rook #ладья
-    def initialize
-      @type = "\u265C"
-    end
+class Rook < Chess#ладья
+  def initialize(color)
+    @type = "\u265C"
+    @color = color
   end
-
 end

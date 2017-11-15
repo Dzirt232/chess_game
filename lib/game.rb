@@ -8,12 +8,12 @@ def game_over?
 end
 
 def game_continue(player_1,player_2)
-  field = Field.new
+  $field = Field.new
   while !game_over?
-    field.show(player_1.color)
+    $field.show(player_1.color)
     player_1.turn
-    break if game_over
-    field.show(player_2.color)
+    break if game_over?
+    $field.show(player_2.color)
     player_2.turn
   end
 end

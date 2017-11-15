@@ -9,7 +9,7 @@ class Player
   end
 
   def turn_right?(turn)
-
+    true
   end
 
   def make_turn(turn)
@@ -17,15 +17,27 @@ class Player
   end
 
   def turn
-    puts "Enter your position:"
     while true
-      turn = gets.chomp.strip
-      save_game if turn == "save"
-      if turn_right?(turn)
-        make_turn(turn)
-        break
+      puts "Enter your figure:"
+      figure = gets.chomp.strip
+      save_game if figure == "save"
+      if figure.match(/^[a-h][1-8]$/)
+        ceil_figure = $field.ceils.select { |ceil| ceil.position == figure }[0]
+        if ceil_figure.figure != nil && @color == ceil_figure.figure.color
+          puts "Enter yor position:"
+          turn = gets.chomp.strip
+          save_game if turn == "save"
+          if turn_right?(turn)
+            make_turn(turn)
+            break
+          else
+            puts "Try again"
+          end
+        else
+          puts "Here is have not your figure, try again"
+        end
       else
-        puts "Try again"
+        puts "This is a wrong input, try again"
       end
     end
   end
