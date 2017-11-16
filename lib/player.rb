@@ -8,31 +8,40 @@ class Player
     @color = color
   end
 
-  def turn_right?(turn)
-    true
+  def turn_right?(start_ceil,turn,figure)
+    if figure.right_xod?(start_ceil,turn)
+      return true
+    end
+    false
   end
 
-  def make_turn(turn)
-
+  def make_turn(start_ceil,aim_ceil,figure)
+    start_ceil.figure = nil
+    aim_ceil.figure = figure
   end
 
-  def turn
+  def turn(field)
     while true
       puts "Turn of Player #{name}"
       puts "Enter your figure:"
       figure = gets.chomp.strip
       save_game if figure == "save"
       if figure.match(/^[a-h][1-8]$/)
-        ceil_figure = $field.ceils.select { |ceil| ceil.position == figure }[0]
-        if ceil_figure.figure != nil && @color == ceil_figure.figure.color
+        start_ceil = field.ceils.select { |ceil| ceil.position == figure }[0]
+        if start_ceil.figure != nil && @color == start_ceil.figure.color
           puts "Enter yor position:"
           turn = gets.chomp.strip
           save_game if turn == "save"
-          if turn_right?(turn)
-            make_turn(turn)
-            break
+          if turn.match(/^[a-h][1-8]$/)
+            aim_ceil = field.ceils.select { |ceil| ceil.position == turn }[0]
+            if turn_right?(start_ceil,aim_ceil,start_ceil.figure)
+              make_turn(start_ceil,aim_ceil,start_ceil.figure)
+              break
+            else
+              puts "Wrong turn, try again."
+            end
           else
-            puts "Try again"
+            puts "Wrong position, try again."
           end
         else
           puts "Here is have not your figure, try again"

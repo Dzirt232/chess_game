@@ -37,13 +37,19 @@ attr_accessor :ceils
           @figure = King.new(color)
         end
       end
+
+      def enemy_ceil?(color)
+        @figure.color != color
+      end
     end
   end
 
   def initialize
+    $colon_array = []
     @ceils = []
     for i in 1..8 do
       for j in 'a'..'h'
+        $colon_array << j
         @ceils << Ceil.new(i,j)
       end
     end
