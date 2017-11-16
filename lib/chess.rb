@@ -9,11 +9,27 @@ class King < Chess#король
     @color = color
     @type = color == :white ? "\u265A" : "\u2654"
   end
+
+  def right_turn?(start_ceil,aim_ceil)
+    row_start = start_ceil.row
+    colon_start = start_ceil.colon
+    row_aim = aim_ceil.row
+    colon_aim = aim_ceil.colon
+    if (row_aim == row_start + 1 || row_aim == row_start - 1) &&
+      ($colon_array.index(colon_start) == $colon_array.index(colon_aim)+1 || $colon_array.index(colon_start) == $colon_array.index(colon_aim)-1 || $colon_array.index(colon_start) == $colon_array.index(colon_aim))
+      puts 1
+      if aim_ceil.figure != nil
+         return true if aim_ceil.enemy_ceil?(@color)
+      end
+      return true if aim_ceil.figure == nil
+    end
+    false
+  end
 end
 
 class Pawn < Chess#пешка
 
-  def right_xod?(start_ceil,aim_ceil)
+  def right_turn?(start_ceil,aim_ceil)
     row_start = start_ceil.row
     colon_start = start_ceil.colon
     row_aim = aim_ceil.row
@@ -27,13 +43,6 @@ class Pawn < Chess#пешка
         return true
       end
     end
-    # print start_ceil.position
-    # print aim_ceil.position
-    # print $colon_array
-    # puts colon_start
-    # puts colon_aim
-    # puts $colon_array.index(colon_start)
-    # puts $colon_array.index(colon_aim)
     false
   end
 

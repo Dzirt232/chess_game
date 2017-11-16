@@ -9,7 +9,7 @@ class Player
   end
 
   def turn_right?(start_ceil,turn,figure)
-    if figure.right_xod?(start_ceil,turn)
+    if figure.right_turn?(start_ceil,turn)
       return true
     end
     false
