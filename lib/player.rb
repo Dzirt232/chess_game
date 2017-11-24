@@ -9,6 +9,9 @@ class Player
   end
 
   def turn_right?(start_ceil,turn,figure)
+    if turn.figure != nil
+      return false if turn.figure.color == @color
+    end
     if figure.right_turn?(start_ceil,turn)
       return true
     end
@@ -24,6 +27,7 @@ class Player
     while true
       puts "Turn of Player #{name}"
       puts "Enter your figure:"
+      $field = field
       figure = gets.chomp.strip
       save_game if figure == "save"
       if figure.match(/^[a-h][1-8]$/)
